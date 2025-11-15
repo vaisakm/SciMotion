@@ -80,14 +80,17 @@ class MainMenuBar(QMenuBar):
         _menu.addAction(_parameters)
 
     def _action(self,
-                      title: str,
-                      function: Callable,
-                      shortcut: str = None
-                      ) -> QAction:
+                  title: str,
+                  function: Callable,
+                  shortcut: str = None
+                  ) -> QAction:
         """Create a QAction for the menu bar."""
         _action = QAction(title, self)
         _action.setStatusTip(title)
-        _action.triggered.connect(function)
+        if function is not None:
+            _action.triggered.connect(function)
+        else:
+            _action.setEnabled(False)
         if shortcut is not None:
             _action.setShortcut(QKeySequence(shortcut))
         return _action
