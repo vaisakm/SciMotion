@@ -2,7 +2,7 @@
 
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import (QWidget, QBoxLayout, QHBoxLayout, QLabel,
-                               QPushButton, QDialog)
+                               QPushButton, QDialog, QMessageBox)
 
 from core.entities.parameter_template import ParameterTemplate, ParameterFlag
 from core.entities.parameter import Parameter
@@ -24,6 +24,11 @@ from gui.services.modifier_gui_service import ModifierGUIService
 
 class InputGUIService:
     """A set of services for inputs."""
+    
+    # Track currently focused parameter for keyframe adding
+    _focused_parameter: Parameter = None
+    _focused_sequence_id: int = None
+    _current_frame: int = 0  # Track current frame for keyframe adding
     
     @classmethod
     def input_from_parameter(cls,
@@ -94,3 +99,57 @@ class InputGUIService:
         """Update a parameter value."""
         parameter.set_current_value(value)
         ModifierGUIService.update_parameter_signal.emit(sequence_id, layer_id)
+    
+    @classmethod
+    def set_focused_parameter(cls, parameter: Parameter, sequence_id: int):
+        """Set the currently focused parameter for keyframe operations."""
+        cls._focused_parameter = parameter
+        cls._focused_sequence_id = sequence_id
+    
+    @classmethod
+    def set_current_frame(cls, frame: int):
+        """Set the current frame for keyframe operations."""
+        cls._current_frame = frame
+    
+    @classmethod
+    def add_keyframe_to_focused_parameter(cls):
+        """Add a keyframe to the currently focused parameter at current frame."""
+        if cls._focused_parameter is None:
+            QMessageBox.information(
+                None, 
+                "No Parameter Selected", 
+                "Please click on a parameter input field first, then press 'K' to add a keyframe."
+            )
+            return
+        
+        try:
+            from core.services.animation_service import AnimationService
+            from core.entities.keyframe import Keyframe
+            from gui.services.sequence_gui_service import SequenceGUIService
+            
+            # Get current frame
+            current_frame = cls._current_frame
+            
+            # Get current parameter value
+            current_value = cls._focused_parameter.get_current_value()
+            
+            # Create and add keyframe
+            keyframe = Keyframe(current_frame, current_value)
+            AnimationService.add_keyframe(cls._focused_parameter, keyframe)
+            
+            QMessageBox.information(
+                None,
+                "Keyframe Added",
+                f"Keyframe added at frame {current_frame}"
+            )
+            
+            # Update the display
+            if cls._focused_sequence_id is not None:
+                ModifierGUIService.update_parameter_signal.emit(cls._focused_sequence_id, 0)
+                
+        except Exception as e:
+            QMessageBox.critical(
+                None,
+                "Error Adding Keyframe",
+                f"Failed to add keyframe: {str(e)}"
+            )

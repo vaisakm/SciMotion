@@ -16,4 +16,13 @@ class Boolean(NDArray):
     _value: np.ndarray
 
     def __init__(self, value: bool):
-        super().__init__(value, dtype=np.bool_, shape=1)
+        super().__init__(value, dtype=np.bool_, shape=1)  # type: ignore[arg-type]
+
+    def to_dict(self) -> dict:
+        """Convert to dictionary for serialization."""
+        return {"value": bool(self._value[0])}
+
+    @staticmethod
+    def from_dict(data: dict) -> 'Boolean':
+        """Create Boolean from dictionary."""
+        return Boolean(data.get("value", False))

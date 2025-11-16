@@ -1,0 +1,521 @@
+{
+  "title": "Black Hole Simulation",
+  "sequences": {
+    "0": {
+      "id": 0,
+      "title": "Black Hole",
+      "width": 1920,
+      "height": 1080,
+      "frame_rate": 60,
+      "duration": 600,
+      "layers": [
+        {
+          "id": 0,
+          "title": "Background",
+          "type": "SolidLayer",
+          "modifiers": [],
+          "color": {
+            "r": 0.0,
+            "g": 0.0,
+            "b": 0.0,
+            "a": 1.0
+          },
+          "width": {
+            "value": 1920
+          },
+          "height": {
+            "value": 1080
+          },
+          "start_frame": 0,
+          "end_frame": 600
+        },
+        {
+          "id": 1,
+          "title": "Black Hole",
+          "type": "SolidLayer",
+          "modifiers": [
+            {
+              "template_id": "black_hole",
+              "enabled": true,
+              "parameters": {
+                "0": {
+                  "keyframes": [
+                    {
+                      "frame": 0,
+                      "value": {
+                        "x": 1260.0,
+                        "y": 540.0
+                      },
+                      "value_type": "Vector2"
+                    },
+                    {
+                      "frame": 15,
+                      "value": {
+                        "x": 1256.3065185546875,
+                        "y": 586.9303588867188
+                      },
+                      "value_type": "Vector2"
+                    },
+                    {
+                      "frame": 30,
+                      "value": {
+                        "x": 1245.31689453125,
+                        "y": 632.705078125
+                      },
+                      "value_type": "Vector2"
+                    },
+                    {
+                      "frame": 45,
+                      "value": {
+                        "x": 1227.302001953125,
+                        "y": 676.1971435546875
+                      },
+                      "value_type": "Vector2"
+                    },
+                    {
+                      "frame": 60,
+                      "value": {
+                        "x": 1202.705078125,
+                        "y": 716.3355712890625
+                      },
+                      "value_type": "Vector2"
+                    },
+                    {
+                      "frame": 75,
+                      "value": {
+                        "x": 1172.132080078125,
+                        "y": 752.1320190429688
+                      },
+                      "value_type": "Vector2"
+                    },
+                    {
+                      "frame": 90,
+                      "value": {
+                        "x": 1136.3355712890625,
+                        "y": 782.705078125
+                      },
+                      "value_type": "Vector2"
+                    },
+                    {
+                      "frame": 105,
+                      "value": {
+                        "x": 1096.1971435546875,
+                        "y": 807.3019409179688
+                      },
+                      "value_type": "Vector2"
+                    },
+                    {
+                      "frame": 120,
+                      "value": {
+                        "x": 1052.705078125,
+                        "y": 825.3169555664062
+                      },
+                      "value_type": "Vector2"
+                    },
+                    {
+                      "frame": 135,
+                      "value": {
+                        "x": 1006.9303588867188,
+                        "y": 836.3065185546875
+                      },
+                      "value_type": "Vector2"
+                    },
+                    {
+                      "frame": 150,
+                      "value": {
+                        "x": 960.0,
+                        "y": 840.0
+                      },
+                      "value_type": "Vector2"
+                    },
+                    {
+                      "frame": 165,
+                      "value": {
+                        "x": 913.0696411132812,
+                        "y": 836.3065185546875
+                      },
+                      "value_type": "Vector2"
+                    },
+                    {
+                      "frame": 180,
+                      "value": {
+                        "x": 867.294921875,
+                        "y": 825.3169555664062
+                      },
+                      "value_type": "Vector2"
+                    },
+                    {
+                      "frame": 195,
+                      "value": {
+                        "x": 823.8028564453125,
+                        "y": 807.3019409179688
+                      },
+                      "value_type": "Vector2"
+                    },
+                    {
+                      "frame": 210,
+                      "value": {
+                        "x": 783.6644287109375,
+                        "y": 782.705078125
+                      },
+                      "value_type": "Vector2"
+                    },
+                    {
+                      "frame": 225,
+                      "value": {
+                        "x": 747.8679809570312,
+                        "y": 752.1320190429688
+                      },
+                      "value_type": "Vector2"
+                    },
+                    {
+                      "frame": 240,
+                      "value": {
+                        "x": 717.294921875,
+                        "y": 716.3355712890625
+                      },
+                      "value_type": "Vector2"
+                    },
+                    {
+                      "frame": 255,
+                      "value": {
+                        "x": 692.6980590820312,
+                        "y": 676.1971435546875
+                      },
+                      "value_type": "Vector2"
+                    },
+                    {
+                      "frame": 270,
+                      "value": {
+                        "x": 674.6830444335938,
+                        "y": 632.705078125
+                      },
+                      "value_type": "Vector2"
+                    },
+                    {
+                      "frame": 285,
+                      "value": {
+                        "x": 663.6934814453125,
+                        "y": 586.9303588867188
+                      },
+                      "value_type": "Vector2"
+                    },
+                    {
+                      "frame": 300,
+                      "value": {
+                        "x": 660.0,
+                        "y": 540.0
+                      },
+                      "value_type": "Vector2"
+                    },
+                    {
+                      "frame": 315,
+                      "value": {
+                        "x": 663.6934814453125,
+                        "y": 493.0696716308594
+                      },
+                      "value_type": "Vector2"
+                    },
+                    {
+                      "frame": 330,
+                      "value": {
+                        "x": 674.6830444335938,
+                        "y": 447.2948913574219
+                      },
+                      "value_type": "Vector2"
+                    },
+                    {
+                      "frame": 345,
+                      "value": {
+                        "x": 692.6980590820312,
+                        "y": 403.8028564453125
+                      },
+                      "value_type": "Vector2"
+                    },
+                    {
+                      "frame": 360,
+                      "value": {
+                        "x": 717.294921875,
+                        "y": 363.6644287109375
+                      },
+                      "value_type": "Vector2"
+                    },
+                    {
+                      "frame": 375,
+                      "value": {
+                        "x": 747.8679809570312,
+                        "y": 327.8679504394531
+                      },
+                      "value_type": "Vector2"
+                    },
+                    {
+                      "frame": 390,
+                      "value": {
+                        "x": 783.6644287109375,
+                        "y": 297.2948913574219
+                      },
+                      "value_type": "Vector2"
+                    },
+                    {
+                      "frame": 405,
+                      "value": {
+                        "x": 823.8028564453125,
+                        "y": 272.6980285644531
+                      },
+                      "value_type": "Vector2"
+                    },
+                    {
+                      "frame": 420,
+                      "value": {
+                        "x": 867.294921875,
+                        "y": 254.68304443359375
+                      },
+                      "value_type": "Vector2"
+                    },
+                    {
+                      "frame": 435,
+                      "value": {
+                        "x": 913.0696411132812,
+                        "y": 243.69349670410156
+                      },
+                      "value_type": "Vector2"
+                    },
+                    {
+                      "frame": 450,
+                      "value": {
+                        "x": 960.0,
+                        "y": 240.0
+                      },
+                      "value_type": "Vector2"
+                    },
+                    {
+                      "frame": 465,
+                      "value": {
+                        "x": 1006.9303588867188,
+                        "y": 243.69349670410156
+                      },
+                      "value_type": "Vector2"
+                    },
+                    {
+                      "frame": 480,
+                      "value": {
+                        "x": 1052.705078125,
+                        "y": 254.68304443359375
+                      },
+                      "value_type": "Vector2"
+                    },
+                    {
+                      "frame": 495,
+                      "value": {
+                        "x": 1096.1971435546875,
+                        "y": 272.6980285644531
+                      },
+                      "value_type": "Vector2"
+                    },
+                    {
+                      "frame": 510,
+                      "value": {
+                        "x": 1136.3355712890625,
+                        "y": 297.2948913574219
+                      },
+                      "value_type": "Vector2"
+                    },
+                    {
+                      "frame": 525,
+                      "value": {
+                        "x": 1172.132080078125,
+                        "y": 327.8679504394531
+                      },
+                      "value_type": "Vector2"
+                    },
+                    {
+                      "frame": 540,
+                      "value": {
+                        "x": 1202.705078125,
+                        "y": 363.6644287109375
+                      },
+                      "value_type": "Vector2"
+                    },
+                    {
+                      "frame": 555,
+                      "value": {
+                        "x": 1227.302001953125,
+                        "y": 403.8028564453125
+                      },
+                      "value_type": "Vector2"
+                    },
+                    {
+                      "frame": 570,
+                      "value": {
+                        "x": 1245.31689453125,
+                        "y": 447.2948913574219
+                      },
+                      "value_type": "Vector2"
+                    },
+                    {
+                      "frame": 585,
+                      "value": {
+                        "x": 1256.3065185546875,
+                        "y": 493.0696716308594
+                      },
+                      "value_type": "Vector2"
+                    },
+                    {
+                      "frame": 600,
+                      "value": {
+                        "x": 1260.0,
+                        "y": 540.0
+                      },
+                      "value_type": "Vector2"
+                    }
+                  ]
+                },
+                "1": {
+                  "keyframes": [
+                    {
+                      "frame": 0,
+                      "value": {
+                        "value": 100.0
+                      },
+                      "value_type": "Number"
+                    },
+                    {
+                      "frame": 150,
+                      "value": {
+                        "value": 250.0
+                      },
+                      "value_type": "Number"
+                    },
+                    {
+                      "frame": 300,
+                      "value": {
+                        "value": 150.0
+                      },
+                      "value_type": "Number"
+                    },
+                    {
+                      "frame": 450,
+                      "value": {
+                        "value": 300.0
+                      },
+                      "value_type": "Number"
+                    },
+                    {
+                      "frame": 600,
+                      "value": {
+                        "value": 100.0
+                      },
+                      "value_type": "Number"
+                    }
+                  ]
+                },
+                "2": {
+                  "keyframes": [
+                    {
+                      "frame": 0,
+                      "value": {
+                        "value": 1.0
+                      },
+                      "value_type": "Number"
+                    },
+                    {
+                      "frame": 300,
+                      "value": {
+                        "value": 1.5
+                      },
+                      "value_type": "Number"
+                    },
+                    {
+                      "frame": 600,
+                      "value": {
+                        "value": 1.0
+                      },
+                      "value_type": "Number"
+                    }
+                  ]
+                },
+                "3": {
+                  "keyframes": []
+                }
+              }
+            },
+            {
+              "template_id": "exposure",
+              "enabled": true,
+              "parameters": {
+                "0": {
+                  "keyframes": [
+                    {
+                      "frame": 0,
+                      "value": {
+                        "value": 2.0
+                      },
+                      "value_type": "Number"
+                    },
+                    {
+                      "frame": 300,
+                      "value": {
+                        "value": 3.0
+                      },
+                      "value_type": "Number"
+                    },
+                    {
+                      "frame": 600,
+                      "value": {
+                        "value": 2.0
+                      },
+                      "value_type": "Number"
+                    }
+                  ]
+                },
+                "1": {
+                  "keyframes": []
+                },
+                "2": {
+                  "keyframes": []
+                }
+              }
+            },
+            {
+              "template_id": "box_blur",
+              "enabled": true,
+              "parameters": {
+                "0": {
+                  "keyframes": [
+                    {
+                      "frame": 0,
+                      "value": {
+                        "value": 5.0
+                      },
+                      "value_type": "Number"
+                    }
+                  ]
+                },
+                "1": {
+                  "keyframes": []
+                },
+                "2": {
+                  "keyframes": []
+                }
+              }
+            }
+          ],
+          "color": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0,
+            "a": 1.0
+          },
+          "width": {
+            "value": 1920
+          },
+          "height": {
+            "value": 1080
+          },
+          "start_frame": 0,
+          "end_frame": 600
+        }
+      ]
+    }
+  }
+}

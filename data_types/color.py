@@ -98,6 +98,27 @@ class Color(NDArray):
         """Return the color space used to define the color."""
         return self._color_space
 
+    def to_dict(self) -> dict:
+        """Convert to dictionary for serialization."""
+        _value = self.get_value(ColorSpace.LINEAR)
+        return {
+            "r": float(_value[0]),
+            "g": float(_value[1]),
+            "b": float(_value[2]),
+            "a": float(_value[3])
+        }
+
+    @staticmethod
+    def from_dict(data: dict) -> 'Color':
+        """Create Color from dictionary."""
+        return Color(
+            data.get("r", 0),
+            data.get("g", 0),
+            data.get("b", 0),
+            data.get("a", 1),
+            color_space=ColorSpace.LINEAR
+        )
+
 
 Color.TRANSPARENT = Color(0, 0, 0, 0, color_space=ColorSpace.SRGB)
 Color.BLACK = Color(0, color_space=ColorSpace.SRGB)

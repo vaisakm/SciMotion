@@ -29,3 +29,13 @@ class Modifier:
     def get_parameter_list(self) -> list[Parameter]:
         """Return the list of parameters."""
         return self._parameter_list
+    
+    def get_parameter(self, param_id: str) -> Parameter:
+        """Get a parameter by its ID (index in the parameter list)."""
+        try:
+            index = int(param_id)
+            if 0 <= index < len(self._parameter_list):
+                return self._parameter_list[index]
+        except (ValueError, IndexError):
+            pass
+        return None

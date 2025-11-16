@@ -174,3 +174,28 @@ class SequenceGUIService:
         if(sequence_id not in cls._selected_layers):
             return False
         return layer_id in cls._selected_layers[sequence_id]
+
+    @classmethod
+    def clear_sequences(cls):
+        """Clear all sequences (for new project)."""
+        from core.entities.project import Project
+        Project.get_sequence_dict().clear()
+        cls._focused_sequence = None
+        cls._selected_layers.clear()
+        cls.focus_sequence_signal.emit(None)
+
+    @classmethod
+    def load_sequences_from_project(cls, project):
+        """Load sequences from a project."""
+        cls.clear_sequences()
+        from core.entities.project import Project
+        _sequence_dict = Project.get_sequence_dict()
+        
+        # Focus first sequence if available
+        if _sequence_dict:
+            first_id = next(iter(_sequence_dict.keys()))
+            cls.focus_sequence(first_id)
+            cls.open_sequence_signal.emit(first_id)
+
+    # Alias for backwards compatibility
+    focus_sequence_id = property(lambda self: self._focused_sequence)

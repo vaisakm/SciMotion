@@ -17,3 +17,20 @@ class Vector3(NDArray):
 
     def __init__(self, *values):
         super().__init__(*values, dtype=np.float32, shape=3)
+
+    def to_dict(self) -> dict:
+        """Convert to dictionary for serialization."""
+        return {
+            "x": float(self._value[0]),
+            "y": float(self._value[1]),
+            "z": float(self._value[2])
+        }
+
+    @staticmethod
+    def from_dict(data: dict) -> 'Vector3':
+        """Create Vector3 from dictionary."""
+        return Vector3(
+            data.get("x", 0),
+            data.get("y", 0),
+            data.get("z", 0)
+        )

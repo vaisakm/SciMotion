@@ -18,6 +18,15 @@ class Number(NDArray):
     def __init__(self, value: float):
         super().__init__(value, dtype=np.float32, shape=1)
 
+    def to_dict(self) -> dict:
+        """Convert to dictionary for serialization."""
+        return {"value": float(self._value[0])}
+
+    @staticmethod
+    def from_dict(data: dict) -> 'Number':
+        """Create Number from dictionary."""
+        return Number(data.get("value", 0))
+
 
 Number.Infinity = Number(float("inf"))
 Number.negInfinity = Number(float("-inf"))
