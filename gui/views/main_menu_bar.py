@@ -1,17 +1,21 @@
 """Main menu bar of the app."""
 
-from typing import Callable
+from typing import Callable, Optional, TYPE_CHECKING, cast
 
 from PySide6.QtGui import QKeySequence, QAction
 from PySide6.QtWidgets import QMenuBar
 
 from gui.services.sequence_gui_service import SequenceGUIService
+from gui.services.project_gui_service import ProjectGUIService
+
+if TYPE_CHECKING:
+    from gui.views.main_window import MainWindow
 
 
 class MainMenuBar(QMenuBar):
     """Main menu bar of the app."""
 
-    def __init__(self, parent):
+    def __init__(self, parent: 'MainWindow'):
         super().__init__(parent)
         self.create_file_menu()
         self.create_edit_menu()
@@ -21,15 +25,17 @@ class MainMenuBar(QMenuBar):
     def create_file_menu(self):
         """Create the file menu."""
         _menu = self.addMenu("&File")
-        _menu.addAction(self._action("New project", None))
-        _menu.addAction(self._action("Open project", None, "Ctrl+O"))
+        _menu.addAction(self._action("New project", ProjectGUIService.create_new_project, "Ctrl+Shift+N"))
+        _menu.addAction(self._action("Open project", ProjectGUIService.open_project, "Ctrl+O"))
         _menu.addSeparator()
-        _menu.addAction(self._action("Save project", None, "Ctrl+S"))
-        _menu.addAction(self._action("Save project as", None, "Ctrl+Shift+S"))
+        _menu.addAction(self._action("Save project", ProjectGUIService.save_project, "Ctrl+S"))
+        _menu.addAction(self._action("Save project as", ProjectGUIService.save_project_as, "Ctrl+Shift+S"))
         _menu.addSeparator()
-        _menu.addAction(self._action("Project parameters", None, "Ctrl+P"))
+        _menu.addAction(self._action("Export video", ProjectGUIService.export_video, "Ctrl+E"))
         _menu.addSeparator()
-        _menu.addAction(self._action("Close", None, "Ctrl+Q"))
+        _menu.addAction(self._action("Project parameters", ProjectGUIService.show_project_parameters, "Ctrl+P"))
+        _menu.addSeparator()
+        _menu.addAction(self._action("Close", lambda: cast('MainWindow', self.parent()).close(), "Ctrl+Q"))
     
     def create_edit_menu(self):
         """Create the edit menu."""
@@ -81,8 +87,8 @@ class MainMenuBar(QMenuBar):
 
     def _action(self,
                   title: str,
-                  function: Callable,
-                  shortcut: str = None
+                  function: Optional[Callable] = None,
+                  shortcut: Optional[str] = None
                   ) -> QAction:
         """Create a QAction for the menu bar."""
         _action = QAction(title, self)

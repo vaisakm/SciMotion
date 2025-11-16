@@ -6,13 +6,14 @@ a visualization tab within the ViewerPane. It holds a GLViewer
 widget which displays images with OpenGL.
 """
 
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QTimer
 from PySide6.QtWidgets import (QFrame, QComboBox, QVBoxLayout, QToolBar,
                                QWidget, QCheckBox)
 from PySide6.QtGui import QWheelEvent, QCursor, QKeyEvent
 
 from gui.views.viewer.gl_viewer import GLViewer
 from gui.services.sequence_gui_service import SequenceGUIService
+from core.services.project_service import ProjectService
 
 
 class ViewerTab(QFrame):
@@ -28,6 +29,11 @@ class ViewerTab(QFrame):
         super().__init__(parent)
         self._sequence_id = sequence_id
         self._current_frame = 0
+        self._is_playing = False
+        
+        # Setup playback timer
+        self._playback_timer = QTimer(self)
+        self._playback_timer.timeout.connect(self._advance_frame)
 
         _layout = QVBoxLayout()
         _layout.setContentsMargins(0,0,0,0)
@@ -48,6 +54,10 @@ class ViewerTab(QFrame):
         """Set the current frame."""
         self._current_frame = frame
         self._gl_viewer.set_current_frame(self._current_frame)
+        
+        # Update InputGUIService so 'K' key knows current frame
+        from gui.services.input_gui_service import InputGUIService
+        InputGUIService.set_current_frame(frame)
     
     def offset_current_frame(self, offset: int):
         """Offset the current frame."""
@@ -148,3 +158,38 @@ class ViewerTab(QFrame):
         if event.key() == Qt.Key_F:
             self._gl_viewer.fit_to_frame(max_zoom=1, just_once=True)
             self.update_zoom_value()
+        elif event.key() == Qt.Key_Space:
+            self.toggle_playback()
+        elif event.key() == Qt.Key_K:
+            # Add keyframe to currently selected parameter
+            # This will be handled by the parameter input widgets
+            # For now, just pass the event up
+            from gui.services.input_gui_service import InputGUIService
+            InputGUIService.add_keyframe_to_focused_parameter()
+    
+    def toggle_playback(self):
+        """Toggle playback on/off."""
+        if self._is_playing:
+            self._playback_timer.stop()
+            self._is_playing = False
+        else:
+            # Get sequence and calculate timer interval from frame rate
+            sequence = ProjectService.get_sequence_by_id(self._sequence_id)
+            if sequence:
+                fps = sequence.get_frame_rate()
+                interval_ms = int(1000.0 / fps)
+                self._playback_timer.start(interval_ms)
+                self._is_playing = True
+    
+    def _advance_frame(self):
+        """Advance to the next frame during playback."""
+        sequence = ProjectService.get_sequence_by_id(self._sequence_id)
+        if sequence:
+            duration = sequence.get_duration()
+            next_frame = self._current_frame + 1
+            
+            # Loop back to start if we reach the end
+            if next_frame >= duration:
+                next_frame = 0
+            
+            SequenceGUIService.set_current_frame(next_frame)

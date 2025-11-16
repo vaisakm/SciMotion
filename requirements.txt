@@ -2,3 +2,4 @@ numpy
 moderngl
 configparser
 pyside6
+pillow
